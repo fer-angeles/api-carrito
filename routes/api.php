@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PassportAuthController;
+use App\Http\Controllers\ProductosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('login', [PassportAuthController::class, 'login']);
+Route::middleware('auth:api')->post('productos/consulta',[ProductosController::class, 'get_productos']);
+
+Route::middleware('api')->post('login', [PassportAuthController::class, 'login']);
+
+Route::middleware('api')->get('login', function(){
+    return 'Api ok';
+})->name('api.ok');
